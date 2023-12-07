@@ -95,7 +95,7 @@
 
 ### Get different values
 > You have different values, that you can get from your config.
-> To get these values, use 'MyConfigClass.MyConfig. ->'
+> To get these values, use 'MyConfigClass.MyConfig'
 - getValue() -> gets the current config value
 - getDefaultValue() -> gets the default value
 - getRange() gets the range (Only for values like Integers, Floats, etc.)

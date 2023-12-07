@@ -1,6 +1,6 @@
 # Config API
 > A Config API for Forge, NeoForge, Fabric and Quilt.
-> 
+
 ---
 ### How to use it?
 
@@ -27,7 +27,7 @@
      public class ExampleMod {
         ...
         public static void init() {
-            ConfigRegister.registerConfig(ConfigRegister.ConfigType.COMMON, TestConfig::new, MOD_ID);
+            ConfigRegister.registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID);
             ...   
         }
         ...

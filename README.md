@@ -150,7 +150,6 @@
 - getKey() -> gets the Key (Config Name)
   - ```
     ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
-
   - It is the String, that you need to define
 - getTranslationKey() -> gets the translation key
 - getRequiresWorldRestart() -> gets the value (true or false) for requiresWorldRestart

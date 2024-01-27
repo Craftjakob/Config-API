@@ -64,7 +64,6 @@
    - You can also give your config file a specific name: 
    - ```
      ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID, "CUSTOM_NAME");
-
 ---
 #### Optional Config Settings
 

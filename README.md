@@ -65,6 +65,15 @@
    - ```
      ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID, "CUSTOM_NAME");
 ---
+### ConfigTypes
+> Client
+>
+> > Client is loaded, when the client setup, of the specific mod loader is loaded. On server the file gots not created.
+> Common
+> > The Common one, is the safest to use, it loads directly and does not require something, that need to be started. It loads directly in registrering.
+> Server
+> > The Server type is only loaded, if the server is started. The config file is only created, if you want to open the config file in the Config Screen, but it is not tracked.
+---
 #### Optional Config Settings
 
 > Inside the ConfigBuilder are different methods to use
@@ -91,7 +100,7 @@
                      .define("ExampleBooleanConfig", true);
          }
       }
-3. You can also use 'requiresWorldRestart', it sets the new value in game, when you have restart the game and creates a comment, that says "Requires World Restart"
+3. You can also use 'requiresWorldRestart', it is only a comment wich says, that this config needs a restart.
    - ```
       @Override
       public void configure(ConfigBuilder builder) {
@@ -146,7 +155,7 @@
         - toString() -> gives a String in this format: "minValue ~ maxValue"
 - getComments() -> gets all comments in a List of Strings
 - getComment() -> all comments are seperated by a new line
-- getPath() -> gets the path, in which the config is
+- getPath() -> gets the path, in which the config is + config key
 - getKey() -> gets the Key (Config Name)
   - ```
     ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);

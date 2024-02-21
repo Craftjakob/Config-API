@@ -7,35 +7,39 @@
 ---
 ### How to add Config API to my project?
 1. Open your build.gradle
-2. Now you need to add this maven url to the repositories
+2. Now you need to add a plugin to your gradle project
    - ```
-     repositories {
+     plugins {
         ...
-        maven {
-            url = "https://maven.pkg.github.com/Craftjakob/Config-API"
-        }
-        ...
+        id 'io.github.0ffz.github-packages' version '1.2.+'
      }
      ```
-3. Now you can add one of these dependencies to your project. Make sure, that you add the dependency, that you need. So if you use forge, then use the forge dependency
-   - ```
-     dependencies {
+3. The next step is, to add inside the repositories the following maven repository
+    - ```
+      repositories {
+        ... 
+        maven githubPackage.invoke("Craftjakob/Config-API")
+      }
+     ```
+4. Now you can add one of these dependencies to your project. Make sure, that you add the dependency, that you need. So if you use forge, then use the forge dependency.
+    - if you can not use modImplementation, then use compileOnly and runtimeOnly.
+    - ```
+      dependencies {
         ...
         modImplementation "com.craftjakob:configapi-common:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-fabric:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-forge:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-neoforge:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-quilt:${mc_version}-${configapi_version}"
-        ...
      }
      ```
-4. Finally, you can reload your gradlew project
+5. Finally, you can reload your gradlew project
 ---
 ### How to use it?
 
 1. Create a new class, which contains your configs
 2. The Config Class need to implement 'IConfigurator' and then implement the 'configure' methode
-   - ```
+    - ```
       public class ExampleConfig implements IConfigurator {
          @Override
          public void configure(ConfigBuilder builder) {
@@ -43,16 +47,16 @@
          }
       }
 3. Create a public static field with the ConfigValue, that you want
-   - ```
+    - ```
       public static ConfigValueTypes.BooleanValue ExampleBooleanConfig;
 4. Inside the 'configure' methode, you need to create the config
-   - ```
+    - ```
      @Override
      public void configure(ConfigBuilder builder) {
         ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
      }
 5. Register your Config Class with ConfigRegister in your Main class. You can choose the config type between CLIENT, COMMON and SERVER.
-   - ```
+    - ```
       public class ExampleMod {
          ...
          public static void init() {
@@ -61,9 +65,9 @@
          }
          ...
       }
-   - You can also give your config file a specific name: 
-   - ```
-     ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID, "CUSTOM_NAME");
+    - You can also give your config file a specific name:
+    - ```
+      ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID, "CUSTOM_NAME");
 ---
 ### ConfigTypes
 > Client
@@ -71,7 +75,7 @@
 > > Client is loaded, when the client setup, of the specific mod loader is loaded. On server the file gots not created.
 >
 > Common
-> 
+>
 > > The Common one, is the safest to use, it loads directly and does not require something, that need to be started. It loads directly in registrering.
 >
 > Server
@@ -82,7 +86,7 @@
 
 > Inside the ConfigBuilder are different methods to use
 1. One methode is the 'comment' methode, it creates a comment for the specific config or category
-   - ```
+    - ```
       public class ExampleConfig implements IConfigurator {
          public static ConfigValueTypes.BooleanValue ExampleBooleanConfig;
          @Override
@@ -93,7 +97,7 @@
          }
       }
 2. In your Config Class you can use 'translation' to translate the comment into a different language, this is displayed in the Config Screen.
-   - ```
+    - ```
       public class ExampleConfig implements IConfigurator {
          public static ConfigValueTypes.BooleanValue ExampleBooleanConfig;
          @Override
@@ -105,7 +109,7 @@
          }
       }
 3. You can also use 'requiresWorldRestart', it is only a comment wich says, that this config needs a restart.
-   - ```
+    - ```
       @Override
       public void configure(ConfigBuilder builder) {
           ExampleBooleanConfig = builder
@@ -123,7 +127,7 @@
 - 'pop()' pushes the category to the right
 - 'pop(count)' allows you to move the category to the right as many times as you want
 - Example:
-  - ```
+    - ```
     @Override
     public void configure(ConfigBuilder builder) {
         builder.push("First Category");
@@ -131,12 +135,12 @@
         builder.pop()
         ExampleIntegerConfig = builder.define("ExampleIntegerConfig", 5, 0, 10);
     } 
-  - ```
-    [First Category]
-      ExampleBooleanConfig = true
-    
-    #Range: 0 ~ 10
-    ExampleIntegerConfig = 5
+    - ```
+      [First Category]
+        ExampleBooleanConfig = true
+      
+      #Range: 0 ~ 10
+      ExampleIntegerConfig = 5
 - You also can give your category a comment or a translation key:
 - ```
   @Override
@@ -161,9 +165,9 @@
 - getComment() -> all comments are seperated by a new line
 - getPath() -> gets the path, in which the config is + config key
 - getKey() -> gets the Key (Config Name)
-  - ```
-    ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
-  - It is the String, that you need to define
+    - ```
+      ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
+    - It is the String, that you need to define
 - getTranslationKey() -> gets the translation key
 - getRequiresWorldRestart() -> gets the value (true or false) for requiresWorldRestart
 - getRequiresClientRestart() -> it's the same as getRequiresWorldRestart(), but only for client

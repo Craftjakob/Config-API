@@ -20,7 +20,6 @@
         ... 
         maven githubPackage.invoke("Craftjakob/Config-API")
       }
-     ```
 4. Now you can add one of these dependencies to your project. Make sure, that you add the dependency, that you need. So if you use forge, then use the forge dependency.
     - if you can not use modImplementation, then use compileOnly and runtimeOnly.
     - ```
@@ -32,7 +31,6 @@
         modImplementation "com.craftjakob:configapi-neoforge:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-quilt:${mc_version}-${configapi_version}"
      }
-     ```
 5. Finally, you can reload your gradlew project
 ---
 ### How to use it?
@@ -51,10 +49,10 @@
       public static ConfigValueTypes.BooleanValue ExampleBooleanConfig;
 4. Inside the 'configure' methode, you need to create the config
     - ```
-     @Override
-     public void configure(ConfigBuilder builder) {
+      @Override
+      public void configure(ConfigBuilder builder) {
         ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
-     }
+      }
 5. Register your Config Class with ConfigRegister in your Main class. You can choose the config type between CLIENT, COMMON and SERVER.
     - ```
       public class ExampleMod {

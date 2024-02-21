@@ -30,7 +30,7 @@
         modImplementation "com.craftjakob:configapi-forge:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-neoforge:${mc_version}-${configapi_version}"
         modImplementation "com.craftjakob:configapi-quilt:${mc_version}-${configapi_version}"
-     }
+      }
 5. Finally, you can reload your gradlew project
 ---
 ### How to use it?

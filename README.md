@@ -126,13 +126,13 @@
 - 'pop(count)' allows you to move the category to the right as many times as you want
 - Example:
     - ```
-    @Override
-    public void configure(ConfigBuilder builder) {
+      @Override
+      public void configure(ConfigBuilder builder) {
         builder.push("First Category");
             ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
         builder.pop()
         ExampleIntegerConfig = builder.define("ExampleIntegerConfig", 5, 0, 10);
-    } 
+      } 
     - ```
       [First Category]
         ExampleBooleanConfig = true

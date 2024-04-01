@@ -106,7 +106,7 @@
                      .define("ExampleBooleanConfig", true);
          }
       }
-3. You can also use 'requiresWorldRestart', it is only a comment wich says, that this config needs a restart.
+3. You can also use 'requiresWorldRestart', it is only a comment which says, that this config needs a restart.
     - ```
       @Override
       public void configure(ConfigBuilder builder) {
@@ -160,7 +160,7 @@
         - getMaxValue() -> gets the maximum value, that is allowed for you config
         - toString() -> gives a String in this format: "minValue ~ maxValue"
 - getComments() -> gets all comments in a List of Strings
-- getComment() -> all comments are seperated by a new line
+- getComment() -> all comments are separated by a new line
 - getPath() -> gets the path, in which the config is + config key
 - getKey() -> gets the Key (Config Name)
     - ```
@@ -202,3 +202,11 @@
 > The Config Screen is automatically added to your project.
 > - In Forge and NeoForge, it's in the mods screen, there you can click on 'Config' to open the screen
 > - Fabric and Quilt has currently no Config Screen, but it will have one maybe via the 'Mod Menu' Mod
+> 
+> If you want to customize your config background, then you need to edit your 'META-INF/mods.toml' in Forge or NeoForge
+> ```
+> [modproperties.${mod_id}]
+>    configBackground="minecraft:textures/block/deepslate.png"
+>    configListBackground="minecraft:textures/block/stone.png"
+> ```
+>  - All configs are shown in a list, that is the configListBackground and the configBackground is there, where the done, search and navigation's buttons are.

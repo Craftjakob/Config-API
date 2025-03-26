@@ -55,14 +55,14 @@
       public class ExampleMod {
          ...
          public static void init() {
-             ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID);
+             ConfigRegister.get().registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new);
              ...   
          }
          ...
       }
     - You can also give your config file a specific name:
     - ```
-      ConfigRegister.get().registerConfig(ConfigRegister.ConfigType.COMMON, ExampleConfig::new, MOD_ID, "CUSTOM_NAME");
+      ConfigRegister.get().registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new, "CUSTOM_NAME");
 ---
 ### ConfigTypes
 > Client
@@ -128,7 +128,7 @@
         builder.push("First Category");
             ExampleBooleanConfig = builder.define("ExampleBooleanConfig", true);
         builder.pop()
-        ExampleIntegerConfig = builder.define("ExampleIntegerConfig", 5, 0, 10);
+        ExampleIntegerConfig = builder.defineInRange("ExampleIntegerConfig", 5, 0, 10);
       } 
     - ```
       [First Category]

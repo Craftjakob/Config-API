@@ -5,12 +5,11 @@
 ### How to add Config API to my project?
 1. Open your build.gradle
 2. Now you need to add a plugin to your gradle project
-   - ```
-     plugins {
+    - ```
+      plugins {
         ...
         id 'io.github.0ffz.github-packages' version '1.2.+'
-     }
-     ```
+      }
 3. The next step is, to add inside the repositories the following maven repository
     - ```
       repositories {
@@ -55,14 +54,19 @@
       public class ExampleMod {
          ...
          public static void init() {
-             ConfigRegister.get().registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new);
+             ConfigRegister.registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new);
              ...   
          }
          ...
       }
+    - In Minecraft version 1.21.4 or less you need to use `ConfigRegister.get().registerConfig(...)`
     - You can also give your config file a specific name:
-    - ```
-      ConfigRegister.get().registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new, "CUSTOM_NAME");
+      - ```
+        ConfigRegister.registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new, "CUSTOM_NAME");
+    - You have also the ability to deactivate the tracking of the config file. So if false and something is changed inside the file, the game will not be notified.
+      - ```
+        ConfigRegister.registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new, false);
+    - Both combined: `ConfigRegister.registerConfig(MOD_ID, ConfigType.COMMON, ExampleConfig::new, "CUSTOM_NAME", false);`
 ---
 ### ConfigTypes
 > Client
@@ -71,7 +75,7 @@
 >
 > Common
 >
-> > The Common one, is the safest to use, it loads directly and does not require something, that need to be started. It loads directly in registrering.
+> > The Common one, is the safest to use, it loads directly and does not require something, that need to be started. It loads directly in registration.
 >
 > Server
 >
@@ -151,7 +155,7 @@
 > To get these values, use 'MyConfigClass.MyConfig'
 - getValue() -> gets the current config value
 - getDefaultValue() -> gets the default value
-- getRange() gets the range (Only for values like Integers, Floats, etc.)
+- getRange() gets the range (Only for number values)
     - if you call the getRange() methode, you can call the following methods:
         - getMinValue() -> gets the minimum value, that is allowed for you config
         - getMaxValue() -> gets the maximum value, that is allowed for you config
@@ -171,7 +175,7 @@
 - getConfig() -> gets the Config class, so you can load or save your config
 
 ### Possible Values to configure
-> These all values can be configured via this Config API
+> All these values can be configured via this Config API
 > - Booleans
 > - Characters
 > - Strings
@@ -199,8 +203,8 @@
 > The Config Screen is automatically added to your project.
 > - In Forge and NeoForge, it's in the mods screen, there you can click on 'Config' to open the screen
 > - Fabric and Quilt has currently no Config Screen, but it will have one maybe via the 'Mod Menu' Mod
-> 
-> If you want to customize your config background, then you need to edit your 'META-INF/mods.toml' in Forge or NeoForge
+>
+> (REMOVED SINCE CONFIG API 2.4.0) If you want to customize your config background, then you need to edit your 'META-INF/mods.toml' in Forge or NeoForge
 > ```
 > [modproperties.${mod_id}]
 >    configBackground="minecraft:textures/block/deepslate.png"
